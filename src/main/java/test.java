@@ -1,40 +1,33 @@
-import java.util.Random;
+import java.util.*;
 
-public class test {
+class Solution {
+    public int solution(int k, int[] tangerine) {
+        Map<Integer, Integer> map = new HashMap<>();
 
-    public static void main(String[] args) {
-        System.out.println("1부터 5까지 출력해주세요");
-        for (int i = 1; i <= 5; i++) {
-            System.out.println("i = " + i);
-        }
+        for (int i = 0; i < tangerine.length; i++) {
 
-        System.out.println("1부터 5까지의 합을 출력해주세요");
-        int i=1;
-        int sum=0;
-        while (i <= 5) {
-           sum += i;
-           i++;
-        }
-        System.out.println(sum);
-        System.out.println("문제 - -100부터 25까지의 합을 출력해주세요.");
-        sum=0;
-        for (int j = -100; j <= 25; j++) {
-              sum+=j;
-        }
-        System.out.println("sum = " + sum);
+            int cur = tangerine[i];
 
-        System.out.println("문제 - 1부터 3까지 출력하는 작업을 10번 해주세요. 2중 while문 사용");
-        int first=0;
-        while (first <10) {
-            int second=1;
-            while (second <=3) {
-                System.out.print(second++ +" ");
+            if (!map.containsKey(cur)) {
+                map.put(i, 1);
+            } else {
+                map.put(i, map.get(i) + 1);
             }
-            first++;
-            System.out.println();
         }
+
+        List<Integer> list = new ArrayList<>(map.values());
+        Collections.sort(list, (a, b) -> b - a);
+
+        int answer = 0;
+        for (int i : list) {
+            System.out.println(i);
+            if (k <= 0) {
+                return answer;
+            }
+            k -= i;
+            answer++;
+        }
+
+        return answer;
     }
-
 }
-
-
