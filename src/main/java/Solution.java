@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Solution {
+public class Solution {
     public int solution(int k, int[] tangerine) {
         Map<Integer, Integer> map = new HashMap<>();
 

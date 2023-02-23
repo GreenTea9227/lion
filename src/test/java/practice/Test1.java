@@ -9,37 +9,35 @@ import static org.assertj.core.api.Assertions.*;
 public class Test1 {
 
     @Test
-    @DisplayName("91일때의 결과는 3")
+    @DisplayName("n이 2일때 결과 값은 2")
     void test1() {
-        assertThat(new Solution().solution(70)).isEqualTo(1);
+       assertThat(new Solution().solution(2)).isEqualTo(2);
     }
 
     @Test
-    @DisplayName("91일때의 결과는 3")
+    @DisplayName("n이 3일때 결과 값은 2")
     void test2() {
-        assertThat(new Solution().solution(91)).isEqualTo(3);
+        assertThat(new Solution().solution(3)).isEqualTo(2);
     }
 
     @Test
-    @DisplayName("92일때의 결과는 3")
+    @DisplayName("n이 4일때 결과 값은 2")
     void test3() {
-        assertThat(new Solution().solution(92)).isEqualTo(3);
+        assertThat(new Solution().solution(4)).isEqualTo(6);
     }
 
-    @Test
-    @DisplayName("180일때의 결과는 4")
-    void test4() {
-        assertThat(new Solution().solution(92)).isEqualTo(3);
 
-    }
 }
 
 class Solution {
-    public int solution(int angle) {
-        if (angle > 90) return 3;
-        if (angle == 180) return 3;
-        return 1;
-
+    public int solution(int n) {
+        int sum=0;
+        for (int i = 1; i <= n; i++) {
+            if (i%2==0) {
+                sum+=i;
+            }
+        }
+        return sum;
     }
 }
 
