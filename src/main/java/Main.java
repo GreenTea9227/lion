@@ -15,7 +15,7 @@ public class Main {
     }
 }
 
-class 자동차   {
+class 자동차 {
     void 달리다() {
     }
 

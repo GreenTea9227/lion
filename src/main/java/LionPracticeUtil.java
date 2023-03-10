@@ -10,10 +10,11 @@ import java.util.Scanner;
 
 public class LionPracticeUtil {
 
-    static Map<Integer, Saying> resultMap = new HashMap<>();
-    private static void update(Scanner sc, String next) {
-        int num = next.indexOf("=");
-        int substring = Integer.parseInt(next.substring(num + 1));
+    public static Map<Integer, Saying> resultMap = new HashMap<>();
+
+    public static void update(Scanner sc, String next) {
+        String[] split = next.trim().split("[?=]");
+        int substring = Integer.parseInt(split[2]);
 
         try {
             Saying saying = resultMap.get(substring);
@@ -31,7 +32,35 @@ public class LionPracticeUtil {
         }
     }
 
-    private static void build() throws IOException {
+    public static void isWritten(boolean flag) {
+        File file1 = new File("C:\\Users\\joseph\\OneDrive\\바탕 화면\\velog\\practice.txt");
+        if (!file1.exists()) {
+            try {
+                file1.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            flag = true;
+        }
+        if (flag) {
+            System.out.println("\n프로그램 다시 시작...\n");
+        }
+        System.out.println("== 명언 앱 ==");
+    }
+
+    public static int saveSaying(int index, Scanner sc) {
+        System.out.print("명언: ");
+        String m1 = sc.nextLine();
+
+        System.out.print("작가: ");
+        String m2 = sc.nextLine();
+        resultMap.put(index, new Saying(index, m1, m2));
+        System.out.printf("%d번 명언이 등록되었습니다.\n", index++);
+        return index;
+    }
+
+    public static void build() throws IOException {
         System.out.println("data.json 파일의 내용이 갱신되었습니다.");
         BufferedWriter file = new BufferedWriter(new FileWriter("C:\\Users\\joseph\\OneDrive\\바탕 화면\\velog\\data.json"));
         JsonFactory jsonFactory = new JsonFactory();
@@ -49,10 +78,10 @@ public class LionPracticeUtil {
         file.close();
     }
 
-    private static void remove(String next) {
-        int num = next.indexOf("=");
+    public static void remove(String next) {
 
-        int substring = Integer.parseInt(next.substring(num + 1));
+        String[] split = next.trim().split("[?=\\s]");
+        int substring = Integer.parseInt(split[2]);
         if (resultMap.containsKey(substring)) {
             resultMap.remove(substring);
             System.out.println(substring + " 번 명언이 삭제 되었습니다.");
@@ -62,7 +91,7 @@ public class LionPracticeUtil {
         }
     }
 
-    private static void showList() {
+    public static void showList() {
         System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------------");
         for (Saying value : resultMap.values()) {
@@ -70,7 +99,7 @@ public class LionPracticeUtil {
         }
     }
 
-    private static void saveFile(Scanner sc) throws IOException {
+    public static void saveFile(Scanner sc) throws IOException {
         BufferedWriter file = new BufferedWriter(new FileWriter("C:\\Users\\joseph\\OneDrive\\바탕 화면\\velog\\practice.txt"));
 
         for (Integer integer : resultMap.keySet()) {
@@ -81,7 +110,7 @@ public class LionPracticeUtil {
         sc.close();
     }
 
-    private static int readAndIndex() throws IOException {
+    public static int readAndIndex() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\joseph\\OneDrive\\바탕 화면\\velog\\practice.txt"));
         String s;
         int index = 1;
@@ -98,10 +127,9 @@ public class LionPracticeUtil {
         reader.close();
         return index;
     }
-
 }
 
- class Saying {
+class Saying {
     private Integer id;
     private String author;
     private String say;

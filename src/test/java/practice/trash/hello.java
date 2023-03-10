@@ -1,3 +1,5 @@
+package practice.trash;
+
 public class hello {
 
     public static int num = 0;
