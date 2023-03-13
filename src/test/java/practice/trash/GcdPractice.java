@@ -1,4 +1,4 @@
-package practice;
+package practice.trash;
 
 public class GcdPractice {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package practice;
+package practice.trash;
 
 public class Pelin {
     public static void main(String[] args) {

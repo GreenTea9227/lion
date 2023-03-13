@@ -4,7 +4,18 @@ public class Calc {
     public static int run(String exp) {
 
         boolean needMulti = exp.contains("*");
-        boolean needPlus = !needMulti;
+        boolean needPlus = exp.contains("+");
+
+        boolean needToCompound = needMulti && needPlus;
+
+        if (needToCompound) {
+            String[] split = exp.split(" \\+ ");
+
+
+            return run(split[1]) + Integer.parseInt(split[0]);
+        }
+
+
         int ans = 0;
 
         if (needPlus) {
